@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingarr">
+        <item>leak by sending message</item>
+        <item>leak by log</item>
+    </string-array>
+</resources>
