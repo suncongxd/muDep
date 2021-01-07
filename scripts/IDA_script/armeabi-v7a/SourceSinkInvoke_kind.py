@@ -6,13 +6,18 @@ from idc import *
 import re
 import datetime,time
 
-
+def getParent(path, levels = 1): 
+    common = path
+    for i in range(levels + 1): 
+        common = os.path.abspath(os.path.join(common, os.pardir))
+    return common
 
 ssInNative = "SSInNative.txt"
 jumpInstrction = ["blx","bl", "b", "bx","b.w", "call"]
 func2Strign = {}
-TaintSourcesAndSinksPath="F:\executor\source&sink\TaintSourcesAndSinks.txt"
-#TaintSourcesAndSinksPath="/media/myw/Study/运行/source&sink/TaintSourcesAndSinks.txt"
+TaintSourcesAndSinksPath = os.path.join(getParent(__file__, 3), 'sources_sinks\TaintSourcesAndSinks.txt')
+#TaintSourcesAndSinksPath="F:\executor\source&sink\TaintSourcesAndSinks.txt"
+
 entryFunction_add =[ entry[2] for entry in Entries()]
 
 
@@ -298,7 +303,7 @@ if __name__ == '__main__':
     
     # Wait for auto-analysis to finish before running script
     idaapi.autoWait()
-    
+
     androidLogCallMth = genFunc2String()
     source_mth, sink_mth = assmebleString()
 
@@ -347,6 +352,4 @@ if __name__ == '__main__':
     writeFile(final_source, final_sink, androidLogCallMth, runtime)
     
     idc.Exit(0)
-    
-    
 

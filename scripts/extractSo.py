@@ -3,10 +3,10 @@
 import os
 import subprocess
 import time,datetime
-#
 
-apk_dir = os.path.dirname(os.getcwd())+'/apks'
-result_path = os.path.dirname(os.getcwd())+'/so'
+apk_dir = os.path.join(os.path.dirname(os.getcwd()), 'apks')
+result_path = os.path.join(os.path.dirname(os.getcwd()), 'so')
+
 if not os.path.exists(result_path):
     os.mkdir(result_path)
 
@@ -19,4 +19,3 @@ for f in os.listdir(apk_dir):
         subprocess.call(cmd,shell=True)
 
 print('Extracted ' + str(num) + ' apk file') 
-
