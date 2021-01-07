@@ -1,0 +1,288 @@
+tools/scripts/benchmark_cli.sh: line 3: source: filename argument required
+source: usage: source filename [arguments]
+tools/scripts/benchmark_cli.sh: line 5: workon: command not found
+JNSafService server started.
+WARNING | 2021-01-07 15:50:09,159 | [34mangr.analyses.disassembly_utils[0m | [34mYour version of capstone does not support MIPS instruction groups.[0m
+INFO    | 2021-01-07 15:50:09,307 | [31mnativedroid.server.NativeDroidServer[0m | [31mServer started.[0m
+INFO@JNSafClient:Client taintAnalysis
+INFO@JNSafClient:Client loadApk
+INFO@JNSafService:Server loadAPK
+Dedexing... Total: 15
+[--------------------------------------------------]   0.00% 0ms ETA: ?[===-----------------------------------------------]   6.67% 5ms ETA: ?[======--------------------------------------------]  13.33% 36ms ETA: ?[==========----------------------------------------]  20.00% 37ms ETA: ?[=============-------------------------------------]  26.67% 39ms ETA: ?[================----------------------------------]  33.33% 40ms ETA: ?[====================------------------------------]  40.00% 41ms ETA: ?[=======================---------------------------]  46.67% 42ms ETA: ?[==========================------------------------]  53.33% 42ms ETA: ?[==============================--------------------]  60.00% 44ms ETA: ?[=================================-----------------]  66.67% 45ms ETA: ?[====================================--------------]  73.33% 47ms ETA: ?[========================================----------]  80.00% 273ms ETA: 68ms[===========================================-------]  86.67% 317ms ETA: 48ms[==============================================----]  93.33% 369ms ETA: 26ms[==================================================] 100.00% 386ms ETA: 0ms [==================================================] 100.00% 387ms ETA: 0ms
+Collecting information from c1fb757a71ad772bde71a9458dc82313a254bf7d73e332cdcbe703e36df0226e.apk...
+Read AndroidManifest.
+INFO@AppInfoCollector:entrypoints--->Set(com.example.interact_nativecode.MainActivity)
+INFO@AppInfoCollector:packagename--->com.example.interact_nativecode
+INFO@AppInfoCollector:permissions--->Set(android.permission.SEND_SMS, android.permission.READ_SMS, android.permission.READ_PHONE_NUMBERS, android.permission.READ_PHONE_STATE, android.permission.ACCESS_COARSE_LOCATION)
+INFO@AppInfoCollector:intentDB------>Map(com.example.interact_nativecode.MainActivity -> Set(component: com.example.interact_nativecode.MainActivity (actions: Set(android.intent.action.MAIN) categories: Set(android.intent.category.LAUNCHER) datas: schemes= Set() authorities= Set() path= Set() pathPrefix= Set() pathPattern= Set() mimeType= Set())))
+White list applied. Moved: 0 classes to user library.
+Read ARSC.
+INFO@AppInfoCollector:arscstring-->Map()
+INFO@AppInfoCollector:arscpackage-->Set(com.example.interact_nativecode)
+Read Layout files.
+INFO@AppInfoCollector:layoutcallback--->Map()
+INFO@AppInfoCollector:layoutuser--->Map(2131296256 -> LayoutControl(2131296256,android.widget.Spinner,false))
+Start reachabilityAnalysis...
+Building Signature Based Call Graph... Total: 4
+[--------------------------------------------------]   0.00% 0ms Left: 4[============--------------------------------------]  25.00% 0ms Left: 3[=========================-------------------------]  50.00% 52ms Left: 2[=====================================-------------]  75.00% 98ms Left: 1[==================================================] 100.00% 106ms Left: 0[==================================================] 100.00% 106ms Left: 0
+CHA done with method size 4.
+ReachabilityAnalysis done.
+Analyzing callbacks...
+Collecting callback methods in layout mappings...
+Collecting callback methods in app source...
+INFO@ReachableInfoCollector:current all callbacks = Map(com.example.interact_nativecode.MainActivity -> Set(Lcom/example/interact_nativecode/MainActivity$1;.onItemSelected:(Landroid/widget/AdapterView;Landroid/view/View;IJ)V, Lcom/example/interact_nativecode/MainActivity$1;.onNothingSelected:(Landroid/widget/AdapterView;)V))
+INFO@AppInfoCollector:LayoutClasses --> Map(com.example.interact_nativecode.MainActivity -> Set(2130903041))
+Collecting XML based callback methods...
+Callback collection done.
+Generate environment for 1 components.
+INFO@AppInfoCollector:Generate environment for com.example.interact_nativecode.MainActivity
+INFO@JawaResolver:Add phantom class android.app.ContextImpl
+WARNING@MethodGenerator:Cannot find constructor for android.app.ContextImpl
+WARNING@MethodGenerator:Cannot create valid constructor for android.widget.AdapterView, because it is public abstract and cannot find substitute.
+INFO@MethodGenerator:Environment code:
+procedure void `envMain`(`android.content.Intent` r0 @kind object) @signature `Lcom/example/interact_nativecode/MainActivity;.envMain:(Landroid/content/Intent;)V` @AccessFlag STATIC {
+    `com.example.interact_nativecode.MainActivity` r1;
+    `android.app.ContextImpl` r2;
+    `android.os.Bundle` r3;
+    `com.example.interact_nativecode.MainActivity$1` r4;
+    `android.view.View` r5;
+    `android.content.ContextWrapper` r6;
+
+  #Label0.
+
+  #Label1.
+  #L0. if RandomCoinToss == head then goto Label20;
+  #L1. r1:= new `com.example.interact_nativecode.MainActivity` ;
+  #L2. call `<init>`(r1) @signature `Lcom/example/interact_nativecode/MainActivity;.<init>:()V` @kind direct;
+  #L3. if RandomCoinToss == head then goto Label19;
+  #L4. r2:= new `android.app.ContextImpl` ;
+  #L5. r1.`android.view.ContextThemeWrapper.mBase` @kind ^`android.content.Context`:= r2 @kind object;
+  #L6. call `setIntent`(r1, r0) @signature `Landroid/app/Activity;.setIntent:(Landroid/content/Intent;)V` @kind virtual;
+  #Label2.
+  #L7. r3:= new `android.os.Bundle` ;
+  #L8. call `<init>`(r3) @signature `Landroid/os/Bundle;.<init>:()V` @kind direct;
+  #L9. call `onCreate`(r1, r3) @signature `Lcom/example/interact_nativecode/MainActivity;.onCreate:(Landroid/os/Bundle;)V` @kind virtual;
+  #Label3.
+
+  #Label4.
+
+  #Label5.
+
+  #Label6.
+  #L10. r4:= new `com.example.interact_nativecode.MainActivity$1` ;
+  #L11. call `<init>`(r4, r1) @signature `Lcom/example/interact_nativecode/MainActivity$1;.<init>:(Lcom/example/interact_nativecode/MainActivity;)V` @kind direct;
+  #L12. if RandomCoinToss == head then goto Label7;
+  #L13. goto Label8;
+  #Label7.
+  #L14. r5:= new `android.view.View` ;
+  #L15. r6:= new `android.content.ContextWrapper` ;
+  #L16. call `<init>`(r6, r6) @signature `Landroid/content/ContextWrapper;.<init>:(Landroid/content/Context;)V` @kind direct;
+  #L17. call `<init>`(r5, r6) @signature `Landroid/view/View;.<init>:(Landroid/content/Context;)V` @kind direct;
+  #L18. call `onItemSelected`(r4, r7, r5, x, x) @signature `Lcom/example/interact_nativecode/MainActivity$1;.onItemSelected:(Landroid/widget/AdapterView;Landroid/view/View;IJ)V` @kind virtual;
+  #Label8.
+
+  #Label9.
+  #L19. if RandomCoinToss == head then goto Label10;
+  #L20. goto Label11;
+  #Label10.
+  #L21. call `onNothingSelected`(r4, r7) @signature `Lcom/example/interact_nativecode/MainActivity$1;.onNothingSelected:(Landroid/widget/AdapterView;)V` @kind virtual;
+  #Label11.
+
+  #Label12.
+
+  #Label13.
+
+  #Label14.
+  #L22. if RandomCoinToss == head then goto Label5;
+  #Label15.
+  #L23. if RandomCoinToss == head then goto Label16;
+  #L24. if RandomCoinToss == head then goto Label4;
+  #L25. if RandomCoinToss == head then goto Label2;
+  #Label16.
+  #L26. if RandomCoinToss == head then goto Label18;
+  #L27. if RandomCoinToss == head then goto Label17;
+  #L28. if RandomCoinToss == head then goto Label2;
+  #Label17.
+  #L29. goto Label3;
+  #Label18.
+  #L30. if RandomCoinToss == head then goto Label19;
+  #Label19.
+
+  #Label20.
+
+  #Label21.
+  #L31. if RandomCoinToss == head then goto Label0;
+  #L32. return @void;
+}
+Info collection done.
+INFO@JNSafClient:Client LoadAPKResponse onNext
+INFO@JNSafClient:Client LoadAPKResponse onCompleted
+INFO@JNSafService:Server taintAnalysis
+Prepare IDFGs for: c1fb757a71ad772bde71a9458dc82313a254bf7d73e332cdcbe703e36df0226e.apk
+--Analyzing component: com.example.interact_nativecode.MainActivity
+INFO@JawaResolver:Add phantom class java.util.HashMap$Entries
+INFO@JawaResolver:Add phantom class android.os.Bundle$Entries
+ComponentBasedAnalysis: Phase 1:
+--Analyzing c1fb757a71ad772bde71a9458dc82313a254bf7d73e332cdcbe703e36df0226e.apk
+----Data Dependence Analysis: com.example.interact_nativecode.MainActivity
+INFO@NoPosition:[IDDG building done!]
+----Building ST for component: ComponentInfo(com.example.interact_nativecode.MainActivity,ACTIVITY,true,true,Set(),Map())
+ComponentBasedAnalysis: Phase 2-------1 apk 1 component-------
+--Link inter-component data dependence
+ComponentBasedAnalysis: Phase 3-------1 apk 1 component-------
+AndroidDataDependentTaintAnalysis found 1 path.
+Taint path: maliciousness:information_theft 
+api_source: Landroid/telephony/TelephonyManager;.getDeviceId:()Ljava/lang/String;
+	-> api_sink: Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I 2
+VirtualBody@(1.onItemSelected,L000850)(MainActivity.envMain,L18)
+	-> #L000888.  call temp:= `v`(v5, v3) @signature `Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I` @kind static;p2
+
+INFO@JNSafService:taint_result {
+  paths {
+    source {
+      name: "#L000850.  call temp:= `getDeviceId`(v4) @signature `Landroid/telephony/TelephonyManager;.getDeviceId:()Ljava/lang/String;` @kind virtual;"
+      desc: "api_source: Landroid/telephony/TelephonyManager;.getDeviceId:()Ljava/lang/String;"
+    }
+    sink {
+      name: "#L000888.  call temp:= `v`(v5, v3) @signature `Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I` @kind static; param: 2"
+      desc: "api_sink: Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I 2"
+    }
+    types: "maliciousness:information_theft"
+    steps: "#L000850.  call temp:= `getDeviceId`(v4) @signature `Landroid/telephony/TelephonyManager;.getDeviceId:()Ljava/lang/String;` @kind virtual;"
+    steps: "#L000888.  call temp:= `v`(v5, v3) @signature `Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I` @kind static; param: 2"
+  }
+}
+
+INFO@JNSafClient:Client taintAnalysis
+INFO@JNSafClient:Client loadApk
+INFO@JNSafService:Server loadAPK
+Dedexing... Total: 15
+[--------------------------------------------------]   0.00% 0ms ETA: ?[===-----------------------------------------------]   6.67% 1ms ETA: ?[======--------------------------------------------]  13.33% 1ms ETA: ?[==========----------------------------------------]  20.00% 1ms ETA: ?[=============-------------------------------------]  26.67% 2ms ETA: ?[================----------------------------------]  33.33% 2ms ETA: ?[====================------------------------------]  40.00% 2ms ETA: ?[=======================---------------------------]  46.67% 2ms ETA: ?[==========================------------------------]  53.33% 2ms ETA: ?[==============================--------------------]  60.00% 3ms ETA: ?[=================================-----------------]  66.67% 3ms ETA: ?[====================================--------------]  73.33% 3ms ETA: ?[========================================----------]  80.00% 18ms ETA: ?[===========================================-------]  86.67% 29ms ETA: ?[==============================================----]  93.33% 61ms ETA: ?[==================================================] 100.00% 70ms ETA: ?[==================================================] 100.00% 70ms ETA: ?
+Collecting information from d753038336dbe831505b369e8b50d9738ad8c247b88649f104a7b841c7cc432b.apk...
+Read AndroidManifest.
+INFO@AppInfoCollector:entrypoints--->Set(com.example.interact_nativecode.MainActivity)
+INFO@AppInfoCollector:packagename--->com.example.interact_nativecode
+INFO@AppInfoCollector:permissions--->Set(android.permission.SEND_SMS, android.permission.READ_SMS, android.permission.READ_PHONE_NUMBERS, android.permission.READ_PHONE_STATE, android.permission.ACCESS_COARSE_LOCATION)
+INFO@AppInfoCollector:intentDB------>Map(com.example.interact_nativecode.MainActivity -> Set(component: com.example.interact_nativecode.MainActivity (actions: Set(android.intent.action.MAIN) categories: Set(android.intent.category.LAUNCHER) datas: schemes= Set() authorities= Set() path= Set() pathPrefix= Set() pathPattern= Set() mimeType= Set())))
+White list applied. Moved: 0 classes to user library.
+Read ARSC.
+INFO@AppInfoCollector:arscstring-->Map()
+INFO@AppInfoCollector:arscpackage-->Set(com.example.interact_nativecode)
+Read Layout files.
+INFO@AppInfoCollector:layoutcallback--->Map()
+INFO@AppInfoCollector:layoutuser--->Map(2131296256 -> LayoutControl(2131296256,android.widget.Spinner,false))
+Start reachabilityAnalysis...
+Building Signature Based Call Graph... Total: 4
+[--------------------------------------------------]   0.00% 0ms Left: 4[============--------------------------------------]  25.00% 0ms Left: 3[=========================-------------------------]  50.00% 14ms Left: 2[=====================================-------------]  75.00% 22ms Left: 1[==================================================] 100.00% 27ms Left: 0[==================================================] 100.00% 28ms Left: 0
+CHA done with method size 4.
+ReachabilityAnalysis done.
+Analyzing callbacks...
+Collecting callback methods in layout mappings...
+Collecting callback methods in app source...
+INFO@ReachableInfoCollector:current all callbacks = Map(com.example.interact_nativecode.MainActivity -> Set(Lcom/example/interact_nativecode/MainActivity$1;.onItemSelected:(Landroid/widget/AdapterView;Landroid/view/View;IJ)V, Lcom/example/interact_nativecode/MainActivity$1;.onNothingSelected:(Landroid/widget/AdapterView;)V))
+INFO@AppInfoCollector:LayoutClasses --> Map(com.example.interact_nativecode.MainActivity -> Set(2130903041))
+Collecting XML based callback methods...
+Callback collection done.
+Generate environment for 1 components.
+INFO@AppInfoCollector:Generate environment for com.example.interact_nativecode.MainActivity
+INFO@JawaResolver:Add phantom class android.app.ContextImpl
+WARNING@MethodGenerator:Cannot find constructor for android.app.ContextImpl
+WARNING@MethodGenerator:Cannot create valid constructor for android.widget.AdapterView, because it is public abstract and cannot find substitute.
+INFO@MethodGenerator:Environment code:
+procedure void `envMain`(`android.content.Intent` r0 @kind object) @signature `Lcom/example/interact_nativecode/MainActivity;.envMain:(Landroid/content/Intent;)V` @AccessFlag STATIC {
+    `com.example.interact_nativecode.MainActivity` r1;
+    `android.app.ContextImpl` r2;
+    `android.os.Bundle` r3;
+    `com.example.interact_nativecode.MainActivity$1` r4;
+    `android.view.View` r5;
+    `android.content.ContextWrapper` r6;
+
+  #Label0.
+
+  #Label1.
+  #L0. if RandomCoinToss == head then goto Label20;
+  #L1. r1:= new `com.example.interact_nativecode.MainActivity` ;
+  #L2. call `<init>`(r1) @signature `Lcom/example/interact_nativecode/MainActivity;.<init>:()V` @kind direct;
+  #L3. if RandomCoinToss == head then goto Label19;
+  #L4. r2:= new `android.app.ContextImpl` ;
+  #L5. r1.`android.view.ContextThemeWrapper.mBase` @kind ^`android.content.Context`:= r2 @kind object;
+  #L6. call `setIntent`(r1, r0) @signature `Landroid/app/Activity;.setIntent:(Landroid/content/Intent;)V` @kind virtual;
+  #Label2.
+  #L7. r3:= new `android.os.Bundle` ;
+  #L8. call `<init>`(r3) @signature `Landroid/os/Bundle;.<init>:()V` @kind direct;
+  #L9. call `onCreate`(r1, r3) @signature `Lcom/example/interact_nativecode/MainActivity;.onCreate:(Landroid/os/Bundle;)V` @kind virtual;
+  #Label3.
+
+  #Label4.
+
+  #Label5.
+
+  #Label6.
+  #L10. r4:= new `com.example.interact_nativecode.MainActivity$1` ;
+  #L11. call `<init>`(r4, r1) @signature `Lcom/example/interact_nativecode/MainActivity$1;.<init>:(Lcom/example/interact_nativecode/MainActivity;)V` @kind direct;
+  #L12. if RandomCoinToss == head then goto Label7;
+  #L13. goto Label8;
+  #Label7.
+  #L14. r5:= new `android.view.View` ;
+  #L15. r6:= new `android.content.ContextWrapper` ;
+  #L16. call `<init>`(r6, r6) @signature `Landroid/content/ContextWrapper;.<init>:(Landroid/content/Context;)V` @kind direct;
+  #L17. call `<init>`(r5, r6) @signature `Landroid/view/View;.<init>:(Landroid/content/Context;)V` @kind direct;
+  #L18. call `onItemSelected`(r4, r7, r5, x, x) @signature `Lcom/example/interact_nativecode/MainActivity$1;.onItemSelected:(Landroid/widget/AdapterView;Landroid/view/View;IJ)V` @kind virtual;
+  #Label8.
+
+  #Label9.
+  #L19. if RandomCoinToss == head then goto Label10;
+  #L20. goto Label11;
+  #Label10.
+  #L21. call `onNothingSelected`(r4, r7) @signature `Lcom/example/interact_nativecode/MainActivity$1;.onNothingSelected:(Landroid/widget/AdapterView;)V` @kind virtual;
+  #Label11.
+
+  #Label12.
+
+  #Label13.
+
+  #Label14.
+  #L22. if RandomCoinToss == head then goto Label5;
+  #Label15.
+  #L23. if RandomCoinToss == head then goto Label16;
+  #L24. if RandomCoinToss == head then goto Label4;
+  #L25. if RandomCoinToss == head then goto Label2;
+  #Label16.
+  #L26. if RandomCoinToss == head then goto Label18;
+  #L27. if RandomCoinToss == head then goto Label17;
+  #L28. if RandomCoinToss == head then goto Label2;
+  #Label17.
+  #L29. goto Label3;
+  #Label18.
+  #L30. if RandomCoinToss == head then goto Label19;
+  #Label19.
+
+  #Label20.
+
+  #Label21.
+  #L31. if RandomCoinToss == head then goto Label0;
+  #L32. return @void;
+}
+Info collection done.
+INFO@JNSafClient:Client LoadAPKResponse onNext
+INFO@JNSafClient:Client LoadAPKResponse onCompleted
+INFO@JNSafService:Server taintAnalysis
+Prepare IDFGs for: d753038336dbe831505b369e8b50d9738ad8c247b88649f104a7b841c7cc432b.apk
+--Analyzing component: com.example.interact_nativecode.MainActivity
+INFO@JawaResolver:Add phantom class java.util.HashMap$Entries
+INFO@JawaResolver:Add phantom class android.os.Bundle$Entries
+ComponentBasedAnalysis: Phase 1:
+--Analyzing d753038336dbe831505b369e8b50d9738ad8c247b88649f104a7b841c7cc432b.apk
+----Data Dependence Analysis: com.example.interact_nativecode.MainActivity
+INFO@NoPosition:[IDDG building done!]
+----Building ST for component: ComponentInfo(com.example.interact_nativecode.MainActivity,ACTIVITY,true,true,Set(),Map())
+ComponentBasedAnalysis: Phase 2-------1 apk 1 component-------
+--Link inter-component data dependence
+ComponentBasedAnalysis: Phase 3-------1 apk 1 component-------
+INFO@JNSafService:taint_result {
+}
+
+Taint analysis result:
+Expected	Result		Apk
+2		1		interact_nativecode.apk
+1		0		interact_nativecode2.apk
