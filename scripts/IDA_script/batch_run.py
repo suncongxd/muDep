@@ -22,7 +22,8 @@ arm64_plugin_path = os.path.join(os.getcwd(), "arm64-v8a\\SourceSinkInvoke_kind.
 x86_plugin_path = os.path.join(os.getcwd(), "x86\\SourceSinkInvoke_kind.py")
 x64_plugin_path = os.path.join(os.getcwd(), "x64\\SourceSinkInvoke_kind.py")
 
-ida_log_path = os.path.join(os.getcwd(), "mylog.log")
+ida_log_path = os.path.join(getParent(os.getcwd(), 1), 'so\\mylog.log')
+#os.path.join(os.getcwd(), "mylog.log")
 
 order = ["armeabi", "armeabi-v7a", "x86", "mips", "arm64-v8a", "x86_64", "mips64"]
 
