@@ -5,7 +5,8 @@ import subprocess
 import time,datetime
 
 apk_dir = os.path.join(os.path.dirname(os.getcwd()), 'apks')
-result_path = os.path.join(os.path.dirname(os.getcwd()), 'so')
+result_path = os.path.join(os.getcwd(), 'so')
+#result_path = os.path.join(os.path.dirname(os.getcwd()), 'so')
 
 if not os.path.exists(result_path):
     os.mkdir(result_path)
