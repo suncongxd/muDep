@@ -93,7 +93,7 @@ for apk in os.listdir(ELF_PATH):
 only_txt_path = os.path.join(os.path.dirname(ELF_PATH), "txt_results")
 print(only_txt_path)
 makeDir(only_txt_path)
-'''
+
 for apk in os.listdir(ELF_PATH):
     lib_dir = os.path.join(ELF_PATH, apk, "lib")
     if not os.path.exists(lib_dir):
@@ -104,4 +104,3 @@ for apk in os.listdir(ELF_PATH):
             makeDir(os.path.join(only_txt_path, apk, arch))
             shutil.copy(os.path.join(lib_dir, arch, "SSInNative.txt"), os.path.join(only_txt_path, apk, arch))
 
-'''
