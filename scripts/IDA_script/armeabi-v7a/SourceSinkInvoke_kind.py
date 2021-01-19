@@ -255,7 +255,8 @@ def writeFile(source_mth, sink_mth, androidLogCallMth, runtime):
         f.write(n.methodName + "; ")
     f.write("\n")
     
-    f.write("runtime: " + str(round(runtime, 9)))
+    #f.write("runtime: " + str(round(runtime, 9)))
+    f.write("runtime: " + int(runtime))
     f.write("\n")
 
     f.close()
