@@ -1,0 +1,20 @@
+Entry Point: <com.example.interact_nativecode.MainActivity$1: void onItemSelected(android.widget.AdapterView,android.view.View,int,long)> (Line: com.example.interact_nativecode.MainActivity 30)
+
+Sink: <android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+Lines: 
+Receiver Sources: 
+Arg 2 Sources: 
+	$r8 = virtualinvoke $r7.<android.telephony.TelephonyManager: java.lang.String getDeviceId()>() (UNIQUE_IDENTIFIER)
+
+Entry Point: <com.example.interact_nativecode.MainActivity$1: void onItemSelected(android.widget.AdapterView,android.view.View,int,long)> (Line: com.example.interact_nativecode.MainActivity 30)
+
+Sink: <android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+Lines: 
+Receiver Sources: 
+Arg 2 Sources: 
+	$r8 = virtualinvoke $r7.<android.telephony.TelephonyManager: java.lang.String getDeviceId()>() (UNIQUE_IDENTIFIER)
+
+
+FLOW:<com.example.interact_nativecode.MainActivity$1: void onItemSelected(android.widget.AdapterView,android.view.View,int,long)>|{<android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>/SMS_MMS/Line: com.example.interact_nativecode.Eavesdropper 14}<={<android.telephony.TelephonyManager: java.lang.String getDeviceId()>/UNIQUE_IDENTIFIER/Line: com.example.interact_nativecode.MainActivity 31/ARG}
+
+
