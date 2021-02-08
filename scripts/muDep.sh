@@ -21,6 +21,8 @@ fuzzing=$mudep_root/Fuzzing2.1
 
 dex2jar=$mudep_root/bin/dex2jar-2.0/d2j-dex2jar.sh
 
+device_serial="emulator-5554"
+
 apk_name=$1 # the apk name without ".apk"
 apk_path=$(realpath $2) # the path of apk, relative path converted to absolute path
 
@@ -86,7 +88,7 @@ echo "phase1 runtime:"$runtime
 ######### Phase 2 ################################
 
 function checkEmulator(){
-	status=$(adb shell getprop sys.boot_completed)
+	status=$(adb -s $device_serial shell getprop sys.boot_completed)
 	times=30
 	num=0 #5min
 	
@@ -95,7 +97,7 @@ function checkEmulator(){
 	do	
 		sleep 10
 		((num++))
-		status=$(adb shell getprop sys.boot_completed)
+		status=$(adb -s $device_serial shell getprop sys.boot_completed)
 		result=$(echo $status | grep "1")
 	done
 	
@@ -123,8 +125,8 @@ function phase2(){
 		echo "Emulator not fully launched!"
 		return
 	fi
-	adb shell mount -o remount rw /
-	adb push $apk_path /sdcard
+	adb -s $device_serial shell mount -o remount rw /
+	adb -s $device_serial push $apk_path /sdcard
 
 	#解压apk,将so加载过来
 	unzip  $apk_path lib/*.so 
@@ -142,14 +144,14 @@ function phase2(){
 	    emulator_error=2
 		echo "Install APK failed, build incomplete!"
 		echo $apk_name" --- Install APK failed" >> $droidsafe_home/android-apps/examples/mutdep_fuzzing_failed.txt
-		adb shell rm /sdcard/$apk_name.apk
+		adb -s $device_serial shell rm /sdcard/$apk_name.apk
 		return
 	fi
 	echo "gradle build success"
 
 	start_tm=`date +%s%N`;
 	#运行mainActivity
-	adb shell am start -n "nativemethod.nativemethod.fuzzing/nativemethod.fuzzing.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+	adb -s $device_serial shell am start -n "nativemethod.nativemethod.fuzzing/nativemethod.fuzzing.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
 
 	#ds_app_dir=$droidsafe_home/android-apps/examples/$apk_name
 	#mkdir $ds_app_dir
@@ -160,12 +162,12 @@ function phase2(){
 
 	#判断flag.json文件是否生成
 	times=100 #10min
-	result=$(adb shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^flag.json$')
+	result=$(adb -s $device_serial shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^finished.txt$')
 	while [ -z "$result" ]&&[ $num -lt $times ]
 	do
 		sleep 6
 		echo "flag.json is under generation ..."
-		result=$(adb shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^flag.json$')
+		result=$(adb shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^finished.txt$')
 		((num++))
 	done
 
@@ -177,11 +179,11 @@ function phase2(){
 		#adb uninstall $fuzzing_package
 		#adb shell rm /sdcard/$apk_name.apk
 
-		flag=$(adb shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^flag.json$')
+		flag=$(adb -s $device_serial shell ls "/data/data/$fuzzing_package/files" | tr -d '\015'|grep '^flag.json$')
 		if [ -z "$flag" ]
 		then
-			adb uninstall $fuzzing_package
-			adb shell rm /sdcard/$apk_name.apk	
+			adb -s $device_serial uninstall $fuzzing_package
+			adb -s $device_serial shell rm /sdcard/$apk_name.apk	
 			return
 		fi
 		return
@@ -198,13 +200,13 @@ function phase2(){
 	if [[ ! -d $ds_app_dir ]]; then
 		mkdir $ds_app_dir
 	fi
-	adb pull $flag_path $ds_app_dir/
+	adb -s $device_serial pull $flag_path $ds_app_dir/
 
 	#卸载fuzzing apk
-	adb uninstall $fuzzing_package
+	adb -s $device_serial uninstall $fuzzing_package
 
 	#删除sdcard的apk
-	adb shell rm /sdcard/$apk_name.apk
+	adb -s $device_serial shell rm /sdcard/$apk_name.apk
 }
 
 ######### Phase 3 ################################
@@ -244,7 +246,7 @@ function phase3(){
 
 	#run droidsafe
 	start_tm=`date +%s%N`;
-	$droidsafe_home/bin/droidsafe -approot $ds_app_dir -apkfile $apk_name.apk -t  specdump
+	python $droidsafe_home/bin/droidsafe -approot $ds_app_dir -apkfile $apk_name.apk -t  specdump
 	end_tm=`date +%s%N`;
 
 	runtime=`echo $end_tm $start_tm | awk '{ print ($1 - $2) / 1000000000}'`
@@ -265,19 +267,14 @@ if [ -f result/$apk_name/app_native_mth.txt ]; then
 	flag_time=$(echo "$phase1_time+$phase2_time"|bc)
 	
 	
-	if [[ "$emulator_error" == "0" ]]
-	then
-		phase3 $apk_path $apk_name
-		phase3_time=$runtime
-		echo "flag_time: "$flag_time >> $droidsafe_home/android-apps/examples/$apk_name/droidsafe-gen/mutdep_runtime.txt #flag time should be added after DroidSafe terminate in phase 3.
-		echo "phase3 runtime:"$runtime
-		echo "droidsafe_time: "$phase3_time >> $droidsafe_home/android-apps/examples/$apk_name/droidsafe-gen/mutdep_runtime.txt #write time
-	fi
-
-	
-else
-	phase3 $apk_path $apk_name
-	phase3_time=$runtime
-	echo "phase3 runtime:"$runtime
-	echo "droidsafe_time: "$phase3_time >> $droidsafe_home/android-apps/examples/$apk_name/droidsafe-gen/mutdep_runtime.txt #write time
+	#if [[ "$emulator_error" == "0" ]]
+	#then
 fi
+
+
+phase3 $apk_path $apk_name
+phase3_time=$runtime
+echo "phase3 runtime:"$runtime
+echo "droidsafe_time: "$phase3_time >> $droidsafe_home/android-apps/examples/$apk_name/droidsafe-gen/mutdep_runtime.txt #write time
+
+
