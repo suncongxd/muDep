@@ -1,0 +1,10 @@
+byte=100
+short=500
+int=100
+long=999999999999999999
+float=400000
+double=100
+lenOfEachDim=8
+StringLen=20
+testNum=15
+mutateDepth=5

@@ -1,0 +1,6 @@
+com.wiyun.engine.events.IKeyHandler: com.fywork.fzlsg.ParticleFlower
+android.view.GestureDetector$OnGestureListener: com.kuguo.ui.ImageGallery
+android.view.GestureDetector$OnDoubleTapListener: com.fywork.fzlsg.ParticleFlower
+com.wiyun.engine.events.IAccelerometerHandler: com.fywork.fzlsg.ParticleFlower
+com.wiyun.engine.events.ITouchHandler: com.fywork.fzlsg.ParticleFlower
+com.wiyun.engine.nodes.Director$IDirectorLifecycleListener: com.fywork.fzlsg.WiEngineLiveWallpaperService$MyLayer

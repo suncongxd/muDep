@@ -1,0 +1,8 @@
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
+<org.arguslab.native_multiple_interactions.MainActivity: void propagateImei(org.arguslab.native_multiple_interactions.Data)>
