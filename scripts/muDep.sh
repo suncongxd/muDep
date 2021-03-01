@@ -21,6 +21,8 @@ fuzzing=$mudep_root/Fuzzing2.1
 
 dex2jar=$mudep_root/bin/dex2jar-2.0/d2j-dex2jar.sh
 
+droidsafe_src_jar=$mudep_root/bin/droidsafe-source.jar
+
 device_serial="emulator-5554"
 
 apk_name=$1 # the apk name without ".apk"
@@ -246,7 +248,8 @@ function phase3(){
 
 	#run droidsafe
 	start_tm=`date +%s%N`;
-	python $droidsafe_home/bin/droidsafe -approot $ds_app_dir -apkfile $apk_name.apk -t  specdump
+	#$droidsafe_home/bin/droidsafe -approot $ds_app_dir -apkfile $apk_name.apk -t  specdump
+	java -jar $droidsafe_src_jar -approot $ds_app_dir -apkfile $apk_name.apk -t  specdump
 	end_tm=`date +%s%N`;
 
 	runtime=`echo $end_tm $start_tm | awk '{ print ($1 - $2) / 1000000000}'`
